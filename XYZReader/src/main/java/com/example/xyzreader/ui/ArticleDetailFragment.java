@@ -1,28 +1,18 @@
 package com.example.xyzreader.ui;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
-import android.content.Context;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.text.format.DateUtils;
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,8 +22,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.squareup.picasso.Picasso;
@@ -55,7 +43,6 @@ public class ArticleDetailFragment extends Fragment implements
     private View mRootView;
     private ImageView mPhotoView;
     private CollapsingToolbarLayout collapsingToolbar;
-    private AppCompatActivity mActivity;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -105,12 +92,6 @@ public class ArticleDetailFragment extends Fragment implements
         return mRootView;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mActivity = (AppCompatActivity) getActivity();
-    }
-
     private void bindViews() {
         if (mRootView == null) {
             return;
@@ -118,16 +99,16 @@ public class ArticleDetailFragment extends Fragment implements
 
         collapsingToolbar =
                 (CollapsingToolbarLayout) mRootView.findViewById(R.id.collapsing_toolbar);
-        TextView bodyView = (TextView) mRootView.findViewById(R.id.article_body);
+        TextView bodyView = (TextView) mRootView.findViewById(R.id.txtArticle);
 
         if (mCursor != null) {
             mRootView.setAlpha(0);
             mRootView.setVisibility(View.VISIBLE);
             mRootView.animate().alpha(1);
             Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
-            mActivity.setSupportActionBar(toolbar);
-            mActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
-            mActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             collapsingToolbar.setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
             collapsingToolbar.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
             collapsingToolbar.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
