@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="@dimen/dimen_4"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground"
+    android:layout_margin="@dimen/dimen_4"
     android:background="@color/cardview_light_background">
 
     <LinearLayout
@@ -14,12 +14,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
+        <com.example.xyzreader.ui.widgets.DynamicHeightNetworkImageView
             android:id="@+id/imgThumbnail"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16"
-            android:layout_gravity="center_horizontal"
             tools:src="@mipmap/ic_launcher"/>
 
         <TextView
